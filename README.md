@@ -61,3 +61,13 @@ vsc prisma plugin 설치하기
 npx prisma init
 DB 설정하기 (기본값은 PostgreSQL)
 PlanetScale로 할거면 MySql로 설정해주자.
+
+### heroIcons
+
+npm i @heroicons/react
+
+Now each icon can be imported individually as a React component:
+
+```javascript
+<BeakerIcon className="h-6 w-6 text-blue-500" />
+```
