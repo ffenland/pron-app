@@ -1,34 +1,63 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Second Version of PP app
 
-## Getting Started
+하도 꼬이고 꼬여서 새로 공부할 겸 새로 만듭니다.
 
-First, run the development server:
+## Setup
 
-```bash
-npm run dev
-# or
-yarn dev
+### 기본설치
+
+npx create-next-app@latest --typescript
+
+### TailwindCSS
+
+npm install -D tailwindcss postcss autoprefixer
+
+설치하고
+
+npx tailwindcss init -p
+
+tailwind.config.js 수정
+
+```
+- content : [
+  "./pages/**/*.{js,jsx,ts,tsx}",  "./components/**/*.{js,jsx,ts,tsx}"
+  ]
+  // {}안에 공백 없게하자
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+styles/global.css 파일 수정
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+@tailwind base;  
+@tailwind components;  
+@tailwind utilities;
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+추가
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### NextJS 설정
 
-## Learn More
+#### import 경로 단축하기
 
-To learn more about Next.js, take a look at the following resources:
+tsconfig.js 의 compilerOptions 항목에 아래 내용 추가.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```javascript
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+"compilerOptions": {
+  "baseUrl": ".",
+  "paths": {
+    "@libs/*": ["libs/*"],
+    "@components": ["components/*"]
+  }
+}
 
-## Deploy on Vercel
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Prisma
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+설치
+npm i prisma -D
+vsc prisma plugin 설치하기
+초기화
+npx prisma init
+DB 설정하기 (기본값은 PostgreSQL)
+PlanetScale로 할거면 MySql로 설정해주자.
