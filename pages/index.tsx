@@ -1,3 +1,4 @@
+import Layout from "@components/layout";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -11,10 +12,11 @@ const Home: NextPage = () => {
         <meta name="description" content="Showing recruting list" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main>hi</main>
-
-      <footer>hi</footer>
+      <Layout title="Home" hasTabBar>
+        <div>
+          <span>안녕하세요 Welcome</span>
+        </div>
+      </Layout>
     </div>
   );
 };

@@ -62,6 +62,12 @@ npx prisma init
 DB 설정하기 (기본값은 PostgreSQL)
 PlanetScale로 할거면 MySql로 설정해주자.
 
+prisma client도 설치를 해주자.
+npm i @prisma/client
+-D 옵션을 쓰지 않는다. 실제로 사용하는 기능이니깐.
+npx prisma generate를 해서 client를 생성해준다.
+lib/server/client.ts 파일을 만들고 client를 초기화.
+
 ### heroIcons
 
 npm i @heroicons/react
@@ -70,4 +76,10 @@ Now each icon can be imported individually as a React component:
 
 ```javascript
 <BeakerIcon className="h-6 w-6 text-blue-500" />
+```
+
+
+### iron-session
+```bash
+npm install iron-session
 ```
