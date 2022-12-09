@@ -78,8 +78,40 @@ Now each icon can be imported individually as a React component:
 <BeakerIcon className="h-6 w-6 text-blue-500" />
 ```
 
-
 ### iron-session
+
 ```bash
 npm install iron-session
 ```
+
+## Layout 구성
+
+Layout component는 canGoBack, title, hasTabBar 속성을 갖습니다. 페이지 별로 속성 값이 다르므로 모든 페이지에서 매번 Layout을 import 해서 사용합니다.
+
+### fixed 속성 주의
+
+tabbar, titlebar는 fixed속성을 사용합니다. fixed속성은 부모요소의 max width값을 무시하므로 다시 설정해줘야합니다.
+
+### canGoBack
+
+뒤로가기 버튼이 있느냐 없느냐를 설정합니다. 뒤로가기버튼은 항상 왼쪽 상단으로 고정하기 위해 position:absolute를 사용하였습니다.
+
+### title
+
+타이틀은 내용만 바뀔뿐 그 요소는 늘 존재한다고 가정.
+
+### children
+
+tabBar의 존재 여부에 따라 padding 값이 바뀝니다. cls 유틸을 이용해서 분기를 나눠줍시다.
+
+## Button component
+
+버튼은 자주 사용되고, 또 일관성을 유지하고자 별도의 컴포넌트로 만들어둡니다.
+floating, small, medium, large 4가지 타입을 가지며 floating은 fixed로 다른 버튼들과 다른 차이점이 있습니다.
+
+## store component
+
+store image, title 등등의 정보를 간략하게 보여줍니다.
+StoreDetail 페이지로 들어가는 링크도 제공합니다.
+
+여기까지만 작성하고 이제 DB model를 구성하겠습니다.
