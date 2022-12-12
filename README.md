@@ -121,6 +121,35 @@ StoreDetail 페이지로 들어가는 링크도 제공합니다.
 Typescript 기반의 ORM.
 SQL문법도 사용가능
 
+### Install
+
+```bash
+npm i prisma -D
+```
+
+### invoke Prisma
+
+프리즈마의 기능은 npx를 이용해 불러온다.
+
+```bash
+npx prisma init
+npx prisma db push
+npx prisma studio
+```
+
+일단은 init을 해주면 root에 prisma 폴더가 생성되고 그 안에 schema.prisma 파일이 생긴다.
+여기서 스키마 정의 및 client설정 DB경로 설정 등등을 해주면 된다.
+
+### prisma/client
+
+클라이언트를 잘 이해하고 넘어가자
+Prisma Client
+TypeScript 및 Node.js용 직관적인 데이터베이스 클라이언트
+Prisma Client는 생각하는 방식으로 구성하고 앱에 맞춤화된 유형으로 Prisma 스키마에서 자동 생성되는 쿼리 빌더입니다.
+npm install @prisma/client
+
 ## PlanetScale
 
-저렴하게 테스트용으로 쓰고 나중엔 Firebase로 넘어갈 생각
+MySQL과 유사한 Vitess 기반의 클라우드 DB
+
+## React Hook Form
