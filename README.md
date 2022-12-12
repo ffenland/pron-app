@@ -114,4 +114,13 @@ floating, small, medium, large 4가지 타입을 가지며 floating은 fixed로 
 store image, title 등등의 정보를 간략하게 보여줍니다.
 StoreDetail 페이지로 들어가는 링크도 제공합니다.
 
-여기까지만 작성하고 이제 DB model를 구성하겠습니다.
+# Database 설정
+
+## Prisma
+
+Typescript 기반의 ORM.
+SQL문법도 사용가능
+
+## PlanetScale
+
+저렴하게 테스트용으로 쓰고 나중엔 Firebase로 넘어갈 생각
