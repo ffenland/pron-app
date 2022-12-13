@@ -1,13 +1,17 @@
 import * as heroicon from "@heroicons/react/24/outline";
 import { cls } from "@libs/client/utils";
 interface ButtonProps {
-  type: "floating" | "small" | "medium" | "large";
+  type?: "floating" | "small" | "medium" | "large";
   title?: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const Button = ({ type = "medium", title, onClick }: ButtonProps) => {
-  const sizeRef = { large: "asdf", medium: "sadfa", small: "adsfasdf" };
+  const sizeRef = {
+    large: "py-3 text-base",
+    medium: "py-2 text-sm ",
+    small: "py-2 text-sm ",
+  };
 
   if (type === "floating") {
     return (
@@ -23,7 +27,12 @@ const Button = ({ type = "medium", title, onClick }: ButtonProps) => {
   } else {
     const sizeCls = sizeRef[type];
     return (
-      <div className={cls("bg-cyan-600 rounded-md", sizeCls)}>
+      <div
+        className={cls(
+          "w-full bg-cyan-500 hover:bg-cyan-600 text-white  px-4 border border-transparent rounded-md shadow-sm font-medium focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 focus:outline-none cursor-pointer",
+          sizeCls
+        )}
+      >
         <button>{title}</button>
       </div>
     );
