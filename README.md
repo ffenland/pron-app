@@ -153,3 +153,58 @@ npm install @prisma/client
 MySQL과 유사한 Vitess 기반의 클라우드 DB
 
 ## React Hook Form
+
+React에서 단순하고 반복적인 일인 Form을 다루는 일을 쉽게 해줍니다. 무한 useState의 늪에서 해방!
+
+```javascript
+import { useForm } from "react-hook-form";
+```
+
+기본적으로 useForm 훅을 불러와서 사용하며
+
+```javascript
+const { register, watch, handleSubmit } = useForm();
+```
+
+useForm훅의 메소드를 불러옵니다.
+Input tag에는 register를 사용하여 input을 등록해서 사용합니다. 첫번째 인자로는 구분할 수 있는 이름, 두번째로는 옵션을 전달합니다. validation에 관한 설정을 비롯해 대부분의 막강파워 기능은 여기서 사용합니다.
+
+```javascript
+<input {...register("고유한이름")}>
+```
+
+form의 경우는 type을 지정해주어야 form에서 넘어오는 data type이나 또는 useForm 자체에서 자동완성 기능을 사용할 수 있다.
+
+```javascript
+interface SignInForm {
+  username: string;
+  email: string;
+  password: string;
+}
+
+const SignIn: NextPage = () => {
+  const { register, handleSubmit, watch } = useForm<SignInForm>({
+    defaultValues: {
+      username: "Guest",
+      email: "Test@Test.com",
+      password: "1234",
+    },
+  });
+
+  const onValid = (data: SignInForm) => {
+    console.log("Valid!");
+  };
+```
+
+validation을 어느시점에 하는지는 mode 값을 정해줘서 변할 수 있다.
+
+```typescript
+const { register, handleSubmit, watch } =
+  useForm <
+  SignInForm >
+  {
+    mode: "onChange",
+  };
+```
+
+## 정규식.
