@@ -8,8 +8,8 @@ interface ButtonProps {
 
 const Button = ({ type = "medium", title, onClick }: ButtonProps) => {
   const sizeRef = {
-    large: "py-3 text-base",
-    medium: "py-2 text-sm ",
+    large: "py-4 text-base",
+    medium: "py-3 text-sm ",
     small: "py-2 text-sm ",
   };
 
@@ -29,7 +29,7 @@ const Button = ({ type = "medium", title, onClick }: ButtonProps) => {
     return (
       <div
         className={cls(
-          "w-full bg-cyan-500 hover:bg-cyan-600 text-white  px-4 border border-transparent rounded-md shadow-sm font-medium focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 focus:outline-none cursor-pointer",
+          "w-full bg-cyan-500 hover:bg-cyan-600 text-white px-4 border border-transparent rounded-md shadow-sm font-medium focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 focus:outline-none cursor-pointer",
           sizeCls
         )}
       >
