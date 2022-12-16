@@ -5,8 +5,6 @@ import { User } from "@prisma/client";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { phone, email } = req.body;
-  console.log("HIHI");
-  console.log(email);
   let user: User | null;
   if (email) {
     user = await client.user.findUnique({ where: { email } });
