@@ -19,8 +19,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           authProvider: "CREDENTIAL",
         },
       });
+    } else {
+      console.log("Found user! " + user.nickname + " Hi");
     }
     console.log(user);
+  }
+  if (phone) {
+    user = await client.user.findUnique;
   }
   return res.json({ ok: true, message: "testing" });
 };

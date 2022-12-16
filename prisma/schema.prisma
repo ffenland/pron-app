@@ -18,6 +18,7 @@ model User {
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
   email        String       @unique
+  phone        String?      @unique
   authProvider AuthProvider
   nickname     String       @unique @db.VarChar(16)
   avatar       String?
