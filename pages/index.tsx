@@ -1,4 +1,5 @@
-import Button from "@components/button";
+import * as heroicon from "@heroicons/react/24/outline";
+import FloatingButton from "@components/floating-button";
 import Layout from "@components/layout";
 import Store from "@components/store";
 import type { NextPage } from "next";
@@ -20,7 +21,9 @@ const Home: NextPage = () => {
             return <Store key={index} id={item} />;
           })}
         </div>
-        <Button type="floating" />
+        <FloatingButton href="/store/upload">
+          <heroicon.PlusIcon className="h-8 w-8" />
+        </FloatingButton>
       </Layout>
     </div>
   );

@@ -35,4 +35,5 @@ enum AuthProvider {
   KAKAO
   NAVER
   GOOGLE
+  CREDENTIAL
 }
