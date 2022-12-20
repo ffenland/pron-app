@@ -39,3 +39,7 @@ next-env.d.ts
 .env
 
 yarn.lock
+
+# challenge
+/pages/challenge
+/pages/api/challenge

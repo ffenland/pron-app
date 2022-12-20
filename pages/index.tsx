@@ -2,12 +2,18 @@ import * as heroicon from "@heroicons/react/24/outline";
 import FloatingButton from "@components/floating-button";
 import Layout from "@components/layout";
 import Store from "@components/store";
-import type { NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
-const Home: NextPage = () => {
+interface PostInterface {
+  id: number;
+  body: string;
+}
+
+const Home: NextPage<{ posts: PostInterface[] }> = ({ posts }) => {
+  console.log("SSRTEST", posts);
   return (
     <div className="">
       <Head>
@@ -30,3 +36,14 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  //const res = await fetch("url");
+  //const posts = await res.json();
+  const posts: PostInterface[] = [{ id: 1, body: "hi" }];
+  return {
+    props: {
+      posts,
+    },
+  };
+};
