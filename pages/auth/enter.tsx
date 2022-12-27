@@ -26,6 +26,7 @@ const Enter: NextPage = () => {
   const onValid = (validForm: EnterForm) => {
     if (loading) return;
     enter(validForm);
+    console.log(data);
   };
   return (
     <div className="mt-16 px-4">
@@ -38,7 +39,7 @@ const Enter: NextPage = () => {
               className={cls(
                 "pb-4 font-medium text-sm border-b-2",
                 method === "email"
-                  ? " border-orange-500 text-orange-400"
+                  ? " border-cyan-500 text-cyan-400"
                   : "border-transparent hover:text-gray-400 text-gray-500"
               )}
               onClick={onEmailClick}
@@ -49,7 +50,7 @@ const Enter: NextPage = () => {
               className={cls(
                 "pb-4 font-medium text-sm border-b-2",
                 method === "phone"
-                  ? " border-orange-500 text-orange-400"
+                  ? " border-cyan-500 text-cyan-400"
                   : "border-transparent hover:text-gray-400 text-gray-500"
               )}
               onClick={onPhoneClick}
@@ -78,14 +79,16 @@ const Enter: NextPage = () => {
               register={register("phone")}
               name="phone"
               label="Phone number"
-              type="number"
+              type="text"
               kind="phone"
               required
             />
           ) : null}
-          {method === "email" ? <Button title={"Get login link"} /> : null}
+          {method === "email" ? (
+            <Button title={loading ? "Loading..." : "Get login link"} />
+          ) : null}
           {method === "phone" ? (
-            <Button title={"Get one-time password"} />
+            <Button title={loading ? "Loading..." : "Get one-time password"} />
           ) : null}
         </form>
         <div className="mt-8">
