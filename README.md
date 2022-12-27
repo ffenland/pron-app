@@ -208,3 +208,7 @@ const { register, handleSubmit, watch } =
 ```
 
 ## 정규식.
+
+## Iron-session
+
+handler를 감싸서 req안에 session을 넣어준다.

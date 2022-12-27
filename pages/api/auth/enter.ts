@@ -37,24 +37,24 @@ const handler = async (
       },
     },
   });
-  if (phone) {
-    const messageRes = await twilioClient.messages.create({
-      messagingServiceSid: process.env.TWILIO_MESSAGE_SID,
-      to: process.env.TWILIO_MYNUMBER!,
-      body: `Welcome to Carrot market. Your token is ${payload}.`,
-    });
-    console.log(messageRes);
-  } else if (email) {
-    const mailOptions = {
-      from: "''FFEN 🥕' <ffenland@gmail.com>",
-      to: email,
-      subject: "Welcome to carrot market",
-      text: `Your token is ${payload}`,
-    };
-    const mailRes = await transporter.sendMail(mailOptions);
-    console.log(mailRes);
-  }
-  return res.json({ ok: true, message: "testing" });
+  // if (phone) {
+  //   const messageRes = await twilioClient.messages.create({
+  //     messagingServiceSid: process.env.TWILIO_MESSAGE_SID,
+  //     to: process.env.TWILIO_MYNUMBER!,
+  //     body: `Welcome to Carrot market. Your token is ${payload}.`,
+  //   });
+  //   console.log(messageRes);
+  // } else if (email) {
+  //   const mailOptions = {
+  //     from: "''FFEN 🥕' <ffenland@gmail.com>",
+  //     to: email,
+  //     subject: "Welcome to carrot market",
+  //     text: `Your token is ${payload}`,
+  //   };
+  //   const mailRes = await transporter.sendMail(mailOptions);
+  //   console.log(mailRes);
+  // }
+  return res.json({ ok: true, token: payload });
 };
 
-export default withHandler({ methods: ["POST"], handler });
+export default withHandler({ methods: ["POST"], handler, isPrivate: false });

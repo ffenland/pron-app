@@ -9,7 +9,10 @@ type method = "GET" | "POST" | "DELETE";
 
 interface ConfigType {
   methods: method[];
-  handler: (req: NextApiRequest, res: NextApiResponse) => Promise<void>;
+  handler: (
+    req: NextApiRequest,
+    res: NextApiResponse
+  ) => Promise<void | NextApiResponse<ResponseType>>;
   isPrivate?: boolean;
 }
 
@@ -18,6 +21,9 @@ const withHandler = ({ methods, handler, isPrivate = true }: ConfigType) => {
   return async (req: NextApiRequest, res: NextApiResponse): Promise<any> => {
     if (req.method && !methods.includes(req.method as any)) {
       return res.status(405).end();
+    }
+    if (isPrivate && !req.session.user) {
+      return res.status(401).json({ ok: false, message: "Please Login." });
     }
     try {
       await handler(req, res);
