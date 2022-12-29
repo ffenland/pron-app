@@ -19,7 +19,7 @@ const Layout = ({ title, canGoBack, hasTabBar, children }: LayoutProps) => {
   };
   return (
     <div className="w-full">
-      <div className="justify-center max-w-2xl w-full text-lg bg-white font-medium py-4 fixed top-0 flex items-center text-gray-700">
+      <div className="justify-center max-w-2xl w-full text-lg bg-white font-medium py-4 fixed top-0 flex items-center text-gray-700 z-20">
         {canGoBack ? (
           <button onClick={onClick} className="absolute left-4">
             <heroicon.ArrowLeftIcon className="h-6 w-6" />

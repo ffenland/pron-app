@@ -1,14 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 
-interface StoreProps {
+interface ItemProps {
   id: string;
   title?: string;
   address?: string;
   image?: string;
+  comments: number;
+  hearts: number;
 }
 
-const Store = ({ id, title, address, image }: StoreProps) => {
+const Item = ({ id, title, address, image, comments, hearts }: ItemProps) => {
   return (
     <Link href={`/stores/${id}`}>
       <a className="flex m-4 p-4 rounded-md items-center shadow-md shadow-gray-400 cursor-pointer hover:bg-slate-100">
@@ -18,7 +20,7 @@ const Store = ({ id, title, address, image }: StoreProps) => {
             src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fapis.naver.com%2Fplace%2Fpanorama%2Fthumbnail%2F13177608%2F0%3Fwidth%3D800%26height%3D400%26msgpad%3D1670564217379%26md%3DClgI3FOl%252B9WJxYu8ozf%252Bx5d7cpU%253D"
             width={120}
             height={120}
-            alt="Store Image"
+            alt="Item Image"
             objectFit="cover"
           />
         </div>
@@ -40,4 +42,4 @@ const Store = ({ id, title, address, image }: StoreProps) => {
   );
 };
 
-export default Store;
+export default Item;

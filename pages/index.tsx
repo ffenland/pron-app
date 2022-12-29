@@ -1,22 +1,28 @@
 import * as heroicon from "@heroicons/react/24/outline";
 import FloatingButton from "@components/floating-button";
 import Layout from "@components/layout";
-import Store from "@components/store";
+import Item from "@components/item";
 import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import useUser from "@libs/client/useUser";
+import useSWR from "swr";
+import { Store } from "@prisma/client";
 
 interface PostInterface {
   id: number;
   body: string;
 }
+interface StoreResponse {
+  ok: boolean;
+  stores: Store[];
+}
 
 const Home: NextPage<{ posts: PostInterface[] }> = ({ posts }) => {
-  console.log("SSRTEST", posts);
   const { user, isLoading } = useUser();
-  console.log(user);
+  const { data } = useSWR<StoreResponse>("/api/stores");
+  console.log(data);
   return (
     <div className="">
       <Head>
@@ -26,8 +32,18 @@ const Home: NextPage<{ posts: PostInterface[] }> = ({ posts }) => {
       </Head>
       <Layout title="Home" hasTabBar canGoBack>
         <div>
-          {["1", "2", "3", "4", "5", "6", "7"].map((item, index) => {
-            return <Store key={index} id={item} />;
+          {data?.stores?.map((store) => {
+            return (
+              <Item
+                key={store.id}
+                id={store.id}
+                title={store.name}
+                address={store.address}
+                image={store.image}
+                comments={1}
+                hearts={1}
+              />
+            );
           })}
         </div>
         <FloatingButton href="/store/upload">
@@ -43,6 +59,7 @@ export default Home;
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //const res = await fetch("url");
   //const posts = await res.json();
+
   const posts: PostInterface[] = [{ id: 1, body: "hi" }];
   return {
     props: {

@@ -6,7 +6,7 @@ const useUser = () => {
   const { data, error } = useSWR("/api/auth/me");
   const router = useRouter();
   useEffect(() => {
-    if (data && !data.ok) {
+    if (data && !data.ok && router.pathname !== "/auth/enter") {
       router.replace("/auth/enter");
     }
   }, [data, router]);
