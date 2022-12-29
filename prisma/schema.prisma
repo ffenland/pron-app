@@ -26,7 +26,7 @@ model User {
   profile      UserProfile?
   tokens       Token[]
   store        Store?
-  Fav          Fav[]
+  favs         Fav[]
 }
 
 model UserProfile {
@@ -63,7 +63,7 @@ model Store {
   image       String
   address     String
   description String   @db.MediumText
-  Fav         Fav[]
+  favs        Fav[]
 
   @@index([userId])
 }
@@ -77,5 +77,6 @@ model Fav {
   store     Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
   storeId   String
 
-  @@index([userId, storeId])
+  @@index([userId])
+  @@index([storeId])
 }

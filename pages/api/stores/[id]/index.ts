@@ -8,7 +8,10 @@ const handler = async (
   req: NextApiRequest,
   res: NextApiResponse<ResponseType>
 ) => {
-  const { id } = req.query;
+  const {
+    query: { id },
+    session: { user },
+  } = req;
   if (!id) return res.json({ ok: false, message: "No id" });
   const store = await client.store.findUnique({
     where: { id: id.toString() },
@@ -28,9 +31,14 @@ const handler = async (
   const relatedStores = await client.store.findMany({
     where: { OR: terms, AND: { id: { not: store?.id } } },
   });
-  console.log("relatedStore", relatedStores);
+  const isLiked = Boolean(
+    await client.fav.findFirst({
+      where: { storeId: store?.id, userId: user?.id },
+      select: { id: true },
+    })
+  );
 
-  return res.json({ ok: true, store, relatedStores });
+  return res.json({ ok: true, store, relatedStores, isLiked });
 };
 
 export default withApiSession(withHandler({ methods: ["GET"], handler }));
