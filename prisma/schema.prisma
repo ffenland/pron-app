@@ -27,6 +27,9 @@ model User {
   tokens       Token[]
   store        Store?
   favs         Fav[]
+  posts        Post[]
+  answers      Answer[]
+  wonderings   Wondering[]
 }
 
 model UserProfile {
@@ -79,4 +82,44 @@ model Fav {
 
   @@index([userId])
   @@index([storeId])
+}
+
+model Post {
+  id         String      @id @default(cuid())
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String
+  question   String      @db.MediumText
+  answers    Answer[]
+  wonderings Wondering[]
+
+  @@index([userId])
+}
+
+model Answer {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    String
+  answer    String   @db.MediumText
+
+  @@index([userId])
+  @@index([postId])
+}
+
+model Wondering {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    String
+
+  @@index([userId])
+  @@index([postId])
 }

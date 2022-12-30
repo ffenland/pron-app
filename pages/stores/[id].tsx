@@ -2,11 +2,12 @@ import type { NextPage } from "next";
 import Button from "@components/button";
 import Layout from "@components/layout";
 import { useRouter } from "next/router";
-import useSWR from "swr";
+import useSWR, { useSWRConfig } from "swr";
 import Link from "next/link";
 import { Store, User } from "@prisma/client";
 import useMutation from "@libs/server/useMutation";
 import { cls } from "@libs/client/utils";
+import useUser from "@libs/client/useUser";
 
 interface StoreWithUser extends Store {
   user: User;
@@ -21,12 +22,30 @@ interface StoreDetailResponse {
 
 const ItemDetail: NextPage = () => {
   const router = useRouter();
+  const { user, isLoading } = useUser();
+  const { mutate: unboundMutate } = useSWRConfig();
   const { data, mutate } = useSWR<StoreDetailResponse>(
     router.query.id ? `/api/stores/${router.query.id}` : null
   );
-  const [toggleFav] = useMutation(`/api/stores/${router.query.id}/fav`);
+  const [toggleFav, { loading }] = useMutation(
+    `/api/stores/${router.query.id}/fav`
+  );
   const onFavClick = () => {
-    toggleFav({});
+    // I want crazy click!!
+    if (!loading) {
+      toggleFav({});
+    }
+    if (!data) return;
+    //mutate({ ...data, isLiked: !data.isLiked }, false);
+    // boundMutaion도 prev를 이용할 수 있다.
+    mutate((prev) => prev && { ...prev, isLiked: !prev?.isLiked });
+    unboundMutate(
+      "/api/auth/me",
+      (prev) => {
+        return { ok: !prev.ok };
+      },
+      false
+    );
   };
   return (
     <Layout canGoBack>

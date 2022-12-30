@@ -14,9 +14,13 @@ interface PostInterface {
   id: number;
   body: string;
 }
+
+interface StoreWithCount extends Store {
+  _count: { favs: number };
+}
 interface StoreResponse {
   ok: boolean;
-  stores: Store[];
+  stores: StoreWithCount[];
 }
 
 const Home: NextPage<{ posts: PostInterface[] }> = ({ posts }) => {
@@ -40,7 +44,7 @@ const Home: NextPage<{ posts: PostInterface[] }> = ({ posts }) => {
                 title={store.name}
                 address={store.address}
                 image={store.image}
-                comments={1}
+                comments={store._count.favs}
                 hearts={1}
               />
             );

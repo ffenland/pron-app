@@ -9,7 +9,9 @@ const handler = async (
   res: NextApiResponse<ResponseType>
 ) => {
   if (req.method === "GET") {
-    const stores = await client.store.findMany({});
+    const stores = await client.store.findMany({
+      include: { _count: { select: { favs: true } } },
+    });
     return res.json({ ok: true, stores });
   }
   if (req.method === "POST") {

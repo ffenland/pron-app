@@ -36,6 +36,7 @@ const Item = ({ id, title, address, image, comments, hearts }: ItemProps) => {
           <span className="text-lg">정규근무</span>
           <span>월~금</span>
           <span>연차 없음</span>
+          <span>좋아요 {hearts}</span>
         </div>
       </a>
     </Link>
