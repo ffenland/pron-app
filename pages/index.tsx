@@ -50,7 +50,7 @@ const Home: NextPage<{ posts: PostInterface[] }> = ({ posts }) => {
             );
           })}
         </div>
-        <FloatingButton href="/store/upload">
+        <FloatingButton href="/stores/upload">
           <heroicon.PlusIcon className="h-8 w-8" />
         </FloatingButton>
       </Layout>
